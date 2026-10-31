@@ -1,6 +1,6 @@
 {
-    "modId": "colors",
-    "modName": "Colors",
+    "modId": "color",
+    "modName": "Color",
     "version": "0.1.0",
     "description": "Colorful.",
     "entryAssembly": "color.dll",
