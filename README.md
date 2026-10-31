@@ -1,4 +1,4 @@
-# colors
+# color
 
 A MISAML mod for Mnemonimov that gives programs a programmable 256-colour pattern.
 
