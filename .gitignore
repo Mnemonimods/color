@@ -3,3 +3,5 @@
 color.dll
 *.gdshader
 *.idea
+*.zip
+*.sha256
