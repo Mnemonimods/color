@@ -11,7 +11,6 @@ public static class Color
 
     // resolved on first use after a program starts, cleared when it starts or stops
     private static object? _vm;
-    private static int[]? _registers;
     private static byte[]? _memory;
 
     private static readonly Hooks HookApi = new();
@@ -44,8 +43,7 @@ public static class Color
 
     public static void Init()
     {
-        HookApi.Register("Asm.Running.VirtualMachine", "Initialize", OnVmStart);
-        HookApi.Register("Asm.Running.VirtualMachine", "Stop", OnVmStop);
+        HookApi.Register("Asm.Running.VirtualMachineeee", "Initialize", OnVmStart);
 
         // loader hands out the numbers once every mod has registered
         IdApi.RegisterSyscall("SYS_SET_PALETTE_COLOR", SetPaletteColor);
@@ -101,7 +99,7 @@ public static class Color
     {
         try
         {
-            _vm = null; _registers = null; _memory = null;
+            _vm = null; _memory = null;
             ResetPalette();
             LoadEmbeddedTables(args.Length > 4 ? args[4] as byte[] : null);
             ApplyBank(0);
@@ -109,23 +107,6 @@ public static class Color
         catch (Exception) { }
 
         return HookResult.Continue(); // let game's own Initialize run
-    }
-
-    // stopped program, wipe palette, clear stuff
-    private static HookResult OnVmStop(object? vm, object?[] args)
-    {
-        try
-        {
-            _vm = null; _registers = null; _memory = null;
-            ResetPalette();
-            Banks.Clear();
-
-            var frame = (byte[])Bridge.GetMember(vm!, "_frontBuffer")!;
-            Array.Clear(frame); // idx 0 = bg
-        }
-        catch (Exception) { }
-
-        return HookResult.Continue(); // let game's own Stop run
     }
 
     private static void ResetPalette()
@@ -288,14 +269,13 @@ public static class Color
     {
         if (ReferenceEquals(vm, _vm)) return;
         _vm = vm;
-        _registers = null;
         _memory = null;
     }
 
     private static int[] Registers(object vm)
     {
         Sync(vm);
-        return _registers ??= (int[])Bridge.GetMember(vm, "_registers")!;
+        return (int[])Bridge.GetMember(vm, "_registers")!;
     }
 
     private static byte[] Memory(object vm)
