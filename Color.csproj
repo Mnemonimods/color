@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AssemblyName>color</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="MISAML">
+      <HintPath>$(MSBuildThisFileDirectory)../MISAML/dist/MISAML/MISAML.dll</HintPath>
+      <!-- this is obviously not going to work for everyone, just make this MISAML.dll if need be-->
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,9 @@
+{
+    "modId": "colors",
+    "modName": "Colors",
+    "version": "0.1.0",
+    "description": "Colorful.",
+    "entryAssembly": "color.dll",
+    "entryMethod": "Color.Init",
+    "entryScript": "main.gd"
+}
